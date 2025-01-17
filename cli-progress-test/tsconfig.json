@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    // 指定编译后的文件输出目录
+    "outDir": "./dist",
+    
+    // 指定 ECMAScript 目标版本为 ES2016
+    // 这将决定编译后的代码可以使用哪些 JS 特性
+    "target": "es2016",
+    
+    // 设置模块解析策略为 NodeNext
+    // 这使得 TypeScript 能够正确解析 Node.js 中的模块导入导出
+    "moduleResolution": "NodeNext",
+    
+    // 指定生成的模块系统代码
+    // NodeNext 表示使用 Node.js 的 ESM 模块系统
+    "module": "NodeNext",
+    
+    // 包含 Node.js 的类型定义
+    // 这样可以使用 Node.js 的内置类型
+    "types": [ "node" ],
+    
+    // 启用 CommonJS 和 ES Module 之间的互操作性
+    // 使得可以使用 import 导入 CommonJS 模块
+    "esModuleInterop": true,
+    
+    // 强制文件名大小写一致
+    // 这在跨平台开发时很重要，因为 Windows 对大小写不敏感而 Linux 敏感
+    "forceConsistentCasingInFileNames": true,
+    
+    // 启用所有严格的类型检查选项
+    // 包括 strictNullChecks、strictFunctionTypes、strictBindCallApply 等
+    "strict": true,
+    
+    // 跳过对依赖包的类型检查
+    // 这可以提高编译性能，特别是在大型项目中
+    "skipLibCheck": true,
+    "noEmit": true,
+
+    "allowImportingTsExtensions": true,
+  }
+}

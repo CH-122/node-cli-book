@@ -1,0 +1,1 @@
+console.log("hello\x1b[1K world");
