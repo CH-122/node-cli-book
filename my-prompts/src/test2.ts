@@ -11,6 +11,12 @@ const questions: PromptOptions[] = [
     type: 'text',
     name: 'age',
   },
+  {
+    message: '你的班级？',
+    type: 'select',
+    name: 'class',
+    choices: ['一班', '二班', '三班'],
+  },
 ]
 
 ;(async function () {

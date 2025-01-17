@@ -1,9 +1,11 @@
+import { SelectPrompt, SelectPromptOptions } from './test-select.ts'
 import { TextPromptOptions, TextPrompt } from './text-prompt.ts'
 
-export type PromptOptions = TextPromptOptions
+export type PromptOptions = TextPromptOptions | SelectPromptOptions
 
 const map: Record<string, any> = {
   text: TextPrompt,
+  select: SelectPrompt,
 }
 
 async function runPrompt(question: PromptOptions) {

@@ -1,3 +1,4 @@
+import ansiEscapes from 'ansi-escapes'
 import EventEmitter from 'events'
 import readline from 'node:readline'
 
@@ -46,5 +47,6 @@ export abstract class Prompt extends EventEmitter {
 
     this.rl.close()
     this.emit('submit', this.value)
+    process.stdout.write(ansiEscapes.eraseDown)
   }
 }
