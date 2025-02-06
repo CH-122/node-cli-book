@@ -40,3 +40,5 @@ coverage/
 .npm
 .eslintcache
 .stylelintcache 
+
+template/**/*
