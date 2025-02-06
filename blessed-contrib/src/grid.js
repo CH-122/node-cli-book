@@ -1,5 +1,5 @@
-const blessed = require('blessed')
-const contrib = require('blessed-contrib')
+import blessed from 'blessed'
+import contrib from 'blessed-contrib'
 
 const screen = blessed.screen({
   fullUnicode: true,
