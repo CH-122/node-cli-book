@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IndexedDB Image Storage</title>
+</head>
+
+<body>
+  <input type="file" id="fileInput">
+  <button id="saveButton">Save Image</button>
+  <button id="loadButton">Load Image</button>
+  <div id="imageContainer"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const fileInput = document.getElementById('fileInput');
+      const saveButton = document.getElementById('saveButton');
+      const loadButton = document.getElementById('loadButton');
+      const imageContainer = document.getElementById('imageContainer');
+      let db;
+
+      // 打开 IndexedDB 数据库
+      const request = indexedDB.open('imageDB', 1);
+
+      request.onerror = (event) => {
+        console.error('Database error:', event.target.errorCode);
+      };
+
+      request.onsuccess = (event) => {
+        db = event.target.result;
+        console.log('Database opened successfully');
+      };
+
+      request.onupgradeneeded = (event) => {
+        db = event.target.result;
+        const objectStore = db.createObjectStore('images', { keyPath: 'id', autoIncrement: true });
+        objectStore.createIndex('image', 'image', { unique: false });
+        console.log('Object store created');
+      };
+
+      // 保存图片到 IndexedDB
+      saveButton.addEventListener('click', () => {
+        const file = fileInput.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const imageData = event.target.result;
+          const transaction = db.transaction(['images'], 'readwrite');
+          const objectStore = transaction.objectStore('images');
+          const request = objectStore.add({ image: imageData });
+
+          request.onsuccess = () => {
+            console.log('Image saved to IndexedDB');
+          };
+
+          request.onerror = (event) => {
+            console.error('Error saving image:', event.target.errorCode);
+          };
+        };
+        reader.readAsDataURL(file);
+      });
+
+      // 从 IndexedDB 加载图片
+      loadButton.addEventListener('click', () => {
+        const transaction = db.transaction(['images'], 'readonly');
+        const objectStore = transaction.objectStore('images');
+        const request = objectStore.getAll();
+
+        request.onsuccess = (event) => {
+          const images = event.target.result;
+          imageContainer.innerHTML = ''; // 清空容器
+          images.forEach((image) => {
+            const imgElement = document.createElement('img');
+            imgElement.src = image.image;
+            imgElement.style.width = '200px'; // 设置预览图片宽度
+            imgElement.style.margin = '10px';
+            imageContainer.appendChild(imgElement);
+          });
+          console.log('Images loaded from IndexedDB');
+        };
+
+        request.onerror = (event) => {
+          console.error('Error loading images:', event.target.errorCode);
+        };
+      });
+    });
+
+  </script>
+</body>
+
+</html>
