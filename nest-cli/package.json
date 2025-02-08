@@ -1,0 +1,36 @@
+{
+  "name": "nest-cli",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "dist/transform.js",
+  "module": "dist/transform.js",
+  "files": [
+    "dist",
+    "package.json",
+  ],
+  "bin": {
+    "hh-cli": "./dist/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/babel__core": "^7.20.5",
+    "@types/node": "^22.13.1",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@babel/core": "^7.26.7",
+    "@babel/parser": "^7.26.7",
+    "@babel/template": "^7.25.9",
+    "@babel/types": "^7.26.7",
+    "@types/babel__template": "^7.4.4",
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "prettier": "^3.4.2"
+  }
+}
